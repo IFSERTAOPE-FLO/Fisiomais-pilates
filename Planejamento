@@ -1,0 +1,36 @@
+'''
+- Classes :
+
+1) Aluno 
+2) Aula 
+3) Instrutor 
+4) Treino 
+5) Assinaturas 
+6) Turma 
+7) Administração 
+8) Agenda 
+9) Desempenho
+
+- Atributos : 
+
+1) Id: identificador do aluno, Nome, Peso, altura, condições, idade, senha. 
+2) Data e hora, duração, tipo de aula, instrutor responsável e aluno. 
+3) Id: identificador do instrutor, nome, formação, telefone, email, dados bancários, senha e agenda de aulas ministradas. 
+4) Aluno id: Referencia do aluno e aula id: referencia a aula. 
+5) Aluno id: referencia ao aluno, tipo de assinatura(1 dia, 2 dias, 3 dias… 1 mês…), data de início, data de fim, status(ativa expirada), valor. 
+6) Nome da turma, instrutor, horário, número máximo, número mínimo, número atual e aluno. 
+7) Senha de acesso ao sistema, telefone para contato, nível de acesso, turmas gestionadas, observações e relatórios. 
+8) Id da agenda, datas, hora, alunos inscritos, observações sobre possíveis eventos, alunos suspensos. 
+9) Id: identificador único do registro de desempenho, aluno id, data da avaliação de desempenho, avaliação física, feedback instrutor, observações, metas estabelecidas, status.
+
+- Métodos : 
+
+1) Alteração de dados 
+2) Exibir horários(vagos ou ocupados), mostrar duração e exibir instrutor responsável.
+3) Aulas que irá se encarregar por dia, avaliações das turmas e alunos e lista de instrutores.
+4) Quantos alunos irão por aula e qual será a aula. 
+5) Quantas assinaturas o studio tem, suas especificações e lista de alunos.
+6) Quantos alunos contém e seu instrutor.
+7) Acesso a lista de alunos, acesso a lista de instrutores, acesso pagamento(alunos e instrutores) e acesso a agenda.
+8) Acesso a horários, acesso às turmas e aulas, informações a eventos e alunos suspensos. 
+9) Acesso a dados dos alunos, acesso a avaliação do instrutor e acesso metas pré estabelecidas.'''
