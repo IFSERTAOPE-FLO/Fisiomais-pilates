@@ -1,1 +1,1 @@
-#Classes : Treino, Turma
+#Classes : Aula, Turma
