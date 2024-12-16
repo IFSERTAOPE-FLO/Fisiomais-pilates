@@ -1,1 +1,1 @@
-#Classes : Instrutor, Administração, Aula
+#Classes : Instrutor, Administração
