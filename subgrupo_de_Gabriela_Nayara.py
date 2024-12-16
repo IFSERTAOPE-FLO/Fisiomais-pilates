@@ -1,1 +1,1 @@
-#Classes : Assinaturas, Administração
+#Classes : Instrutor, Administração, Aula
