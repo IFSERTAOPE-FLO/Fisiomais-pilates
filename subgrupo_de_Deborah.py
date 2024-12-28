@@ -1,6 +1,8 @@
 #Classes : Anamnese, Assinaturas, Login
 
 
+#Anamnese :
+
 class Anamnese:
   def __init__(self, nome, peso, altura, idade, telefone, endereco, profissao, responsavel):
     self.nome = nome
@@ -198,17 +200,7 @@ Endereço : {self.endereco}''')
 
 
 
-
-
-class Assinatura:
-  def __init__(self, senha):
-   self.senha = senha
-
-
-user1 = Anamnese(None, None, None, None, None, None, None, None)
-user1.exibir_dados()
-
-
+#Assinaturas :
 
 from datetime import datetime, timedelta
 
@@ -278,8 +270,6 @@ class AssinaturaPilates:
         return (f"Aluno ID: {self.aluno_id}, Tipo: {self.tipo.capitalize()}, "
                 f"Data Início: {self.data_inicio.strftime('%d/%m/%Y')}, Data Fim: {self.data_fim.strftime('%d/%m/%Y')}, "
                 f"Status: {self.status.capitalize()}, Valor Total: R${self.valor_total:.2f}")
-
-
 
 
 class Assinaturas:
@@ -467,4 +457,7 @@ while True:
 
 
 
+
+user1 = Anamnese(None, None, None, None, None, None, None, None)
+user1.exibir_dados()
 
