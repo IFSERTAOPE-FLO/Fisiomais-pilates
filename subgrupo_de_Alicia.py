@@ -79,3 +79,49 @@ class Aula:
        else:
           self.ocupado = True 
           print(f"Aula de {self.tipo_de_aula} em {self.data_hora.strftime('%d/%m/%y %h:%m')} foi reservada com sucesso!!")
+ 
+            #classe Turma
+class Turma:
+    def__init__ (self, nome_da_turma, instrutor, horario, numero_maximo, numero_minimo, numero_atual, aluno)
+        self.nome_da_turma = nome_da_turma
+        self.instrutor = instrutor
+        self.horario = horario 
+        self.numero_maximo = numero_maximo
+        self.numero_minimo = numero_minimo
+        self.alunos = []  
+
+    def adicionar_aluno(self, aluno):
+        if len(self.alunos) < self.numero_maximo:
+            self.alunos.append(aluno)
+            print(f"Aluno {aluno.nome} adicionado à turma {self.nome_da_turma}.")
+        else:
+            print(f"A turma {self.nome_da_turma} atingiu o número máximo de alunos.")
+
+    def remover_aluno(self, aluno):
+        if aluno in self.alunos:
+            self.alunos.remove(aluno)
+            print(f"Aluno {aluno.nome} removido da turma {self.nome_da_turma}.")
+        else:
+            print(f"O aluno {aluno.nome} não está na turma {self.nome_da_turma}.")
+
+    def exibir_alunos(self):
+      if self.alunos:
+        print(f"Alunos da turma {self.nome_da_turma}:")
+        for aluno in self.alunos:
+            print(f"- {aluno.nome}")
+      else:
+        print(f"A turma {self.nome_da_turma} não possui alunos.")
+
+
+    def exibir_dados_turma(self):
+        print(f"Nome da Turma: {self.nome_da_turma}")
+        print(f"Instrutor: {self.instrutor.nome}")
+        print(f"Horário: {self.horario}")
+        print(f"Número Máximo de Alunos: {self.numero_maximo}")
+        print(f"Número Mínimo de Alunos: {self.numero_minimo}")
+        self.exibir_alunos()
+        print("-" * 20)
+
+
+
+
