@@ -108,3 +108,90 @@ instrutores = [instrutor1, instrutor2]
 
 instrutores_listados = instrutor1.listar_instrutores(instrutores)
 print(instrutores_listados)
+
+
+
+from datetime import datetime
+
+class Administracao(Assinaturas):
+    def __init__(self, senha, telefone, nivel_acesso):
+        super().__init__()
+        self.senha = senha
+        self.telefone = telefone
+        self.nivel_acesso = nivel_acesso
+        self.turmas_gestionadas = []
+        self.observacoes = []
+        self.relatorios = {}
+        self.instrutores = {}
+
+    def cadastrar_instrutor(self, instrutor_id, nome, especialidade):
+        if instrutor_id in self.instrutores:
+            print(f"Erro: Instrutor com ID {instrutor_id} já cadastrado.")
+            return
+        self.instrutores[instrutor_id] = {
+            'nome': nome,
+            'especialidade': especialidade
+        }
+        print(f"Instrutor {nome} cadastrado com sucesso!")
+
+    def listar_instrutores(self):
+        print("Instrutores cadastrados:")
+        for instrutor_id, dados in self.instrutores.items():
+            print(f"ID: {instrutor_id}, Nome: {dados['nome']}, Especialidade: {dados['especialidade']}")
+
+    def adicionar_turma(self, turma_id, instrutor_id, horario):
+        if turma_id in self.turmas:
+            print("Erro: Turma já existente.")
+            return
+        if instrutor_id not in self.instrutores:
+            print("Erro: Instrutor não cadastrado.")
+            return
+        self.turmas[turma_id] = {
+            'instrutor_id': instrutor_id,
+            'horario': horario,
+            'alunos': []
+        }
+        self.turmas_gestionadas.append(turma_id)
+        print(f"Turma {turma_id} adicionada com sucesso!")
+
+    def listar_turmas(self):
+        print("Turmas existentes:")
+        for turma_id, info in self.turmas.items():
+            instrutor_nome = self.instrutores[info['instrutor_id']]['nome']
+            print(f"Turma ID: {turma_id}, Instrutor: {instrutor_nome}, Horário: {info['horario']}")
+
+    def adicionar_observacao(self, observacao):
+        self.observacoes.append(observacao)
+        print("Observação adicionada.")
+
+    def gerar_relatorio(self, relatorio_id, descricao):
+        data = datetime.now().strftime('%d/%m/%Y %H:%M')
+        self.relatorios[relatorio_id] = {
+            'descricao': descricao,
+            'data': data
+        }
+        print(f"Relatório {relatorio_id} gerado em {data}.")
+
+    def acessar_pagamentos(self):
+        print("Lista de pagamentos pendentes e realizados:")
+        for assinatura in self.assinaturas:
+            print(assinatura)
+
+    def acessar_agenda(self):
+        print("Agenda de turmas e horários:")
+        for turma_id, info in self.turmas.items():
+            instrutor_nome = self.instrutores[info['instrutor_id']]['nome']
+            print(f"Turma: {turma_id}, Instrutor: {instrutor_nome}, Horário: {info['horario']}")
+
+# Exemplo de uso
+admin = Administracao(senha="1234", telefone="(11) 98765-4321", nivel_acesso="Administrador")
+admin.cadastrar_aluno(1, "João Silva")
+admin.cadastrar_instrutor(101, "Carlos Souza", "Pilates Avançado")
+admin.adicionar_turma("T01", 101, "Segundas e Quartas - 19h")
+admin.listar_alunos()
+admin.listar_instrutores()
+admin.listar_turmas()
+admin.adicionar_observacao("Revisar materiais de treino.")
+admin.gerar_relatorio("R01", "Resumo mensal de atividades.")
+admin.acessar_agenda()
+
