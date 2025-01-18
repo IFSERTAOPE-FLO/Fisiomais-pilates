@@ -48,7 +48,7 @@ class Anamnese:
     self.telefone = int(input("\nInforme o seu telefone: \nR = "))
     self.endereco = input("\nInforme o seu endereço: \nR = ")
     while True:
-     if self.idade > 18:
+     if self.idade >= 18:
       self.profissao = input("\nInforme a sua profissão: \nR = ")
       break
      else:
@@ -56,7 +56,7 @@ class Anamnese:
       break
     while True:
      if self.idade < 18:
-      self.responsavel == input("Informe o nome do seu responsável : R = ")
+      self.responsavel = input("\nInforme o nome do seu responsável : R = ")
       break
      else:
       self.responsavel = "NÃO"
@@ -90,7 +90,7 @@ class Anamnese:
     while True:
      self.questoes["teve_cirurgia"] = input("\nTeve cirurgia (Sim/Não)? \nR = ").upper()
      if self.questoes["teve_cirurgia"] == "SIM":
-      self.questoes["detalhes_da_cirurgia"] = input("Informe detalhes da cirurgia : \nR = ")
+      self.questoes["detalhes_da_cirurgia"] = input("\nInforme detalhes da cirurgia : \nR = ")
       break
      elif self.questoes["teve_cirurgia"] == "NÃO":
       break
@@ -180,11 +180,11 @@ Endereço : {self.endereco}''')
    print("Queixa principal : ", self.questoes["queixa"])
    print("Praticou pilates : ", self.questoes["se_praticou_pilates"])
    if self.questoes["pratica_atividade_fisicas"] == "SIM":
-    print(f"Pratica atividades física : ", self.questoes["pratica_atividade_fisicas"],". ", self.questoes["qual_e_frequencia_da_atividade_fisicas"])
+    print(f"Pratica atividades física : ", self.questoes["pratica_atividade_fisicas"],".", self.questoes["qual_e_frequencia_da_atividade_fisicas"])
    else:
     print(f"Pratica atividades física : ", self.questoes["pratica_atividade_fisicas"])
    if self.questoes["teve_cirurgia"] == "SIM":
-    print(f"Teve cirurgia : ",self.questoes["teve_cirurgia"], ". ", self.questoes["detalhes_da_cirurgia"])
+    print(f"Teve cirurgia : ",self.questoes["teve_cirurgia"],".", self.questoes["detalhes_da_cirurgia"])
    else:
     print(f"Teve cirurgia : ",self.questoes["teve_cirurgia"])
    print(f"Usa medicamentos : ",self.questoes["usa_medicamentos"])
@@ -197,7 +197,8 @@ Endereço : {self.endereco}''')
    print(f"Aliviar as dores : ",self.objetivos["Aliviar_dor"])
    print(f"Melhor condicionamento físico : ",self.objetivos["Melhor_condicionamento"])
    print(f"Fortalecer os musculos : ",self.objetivos["Fortalecer_musculos"])
-
+   print("\n=-=-=-=-=- Ficha de anamnese finalizada! -=-=-=-=-=\n")
+   print("=-=-"*13)
 
 #Assinaturas :
 import random
@@ -271,7 +272,7 @@ class Assinaturas:
 
     def gerar_id_unico(self):
         while True:
-            novo_id = str(random.randint(100, 999))  # Gera um ID de 3 dígitos
+            novo_id = str(random.randint(100, 999))  
             if novo_id not in self.alunos:
                 return novo_id
 
@@ -429,8 +430,8 @@ def menu():
         else:
             print("Opção inválida. Tente novamente.")
 
+user = Anamnese(None, None, None, None, None, None, None, None)
+user.questionario()
+user.exibir_dados()
+
 iniciar_sistema()
-
-user1 = Anamnese(None, None, None, None, None, None, None, None)
-user1.exibir_dados()
-
