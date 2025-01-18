@@ -1,6 +1,8 @@
 #Classes : Anamnese, Assinaturas, Login
 
 
+#Anamnese :
+
 class Anamnese:
   def __init__(self, nome, peso, altura, idade, telefone, endereco, profissao, responsavel):
     self.nome = nome
@@ -197,9 +199,7 @@ Endereço : {self.endereco}''')
    print(f"Fortalecer os musculos : ",self.objetivos["Fortalecer_musculos"])
 
 
-
-
-
+#Assinaturas :
 import random
 from datetime import datetime, timedelta
 
@@ -430,4 +430,7 @@ def menu():
             print("Opção inválida. Tente novamente.")
 
 iniciar_sistema()
+
+user1 = Anamnese(None, None, None, None, None, None, None, None)
+user1.exibir_dados()
 
