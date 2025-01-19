@@ -3,6 +3,7 @@
 
 #Anamnese :
 
+
 class Anamnese:
   def __init__(self, nome, peso, altura, idade, telefone, endereco, profissao, responsavel):
     self.nome = nome
@@ -13,6 +14,8 @@ class Anamnese:
     self.endereco = endereco
     self.profissao = profissao
     self.responsavel = responsavel
+
+
 
 
     self.questoes = {
@@ -34,10 +37,14 @@ class Anamnese:
      }
 
 
+
+
   def questionario(self):
     print("=-=-"*10)
     print("\n=-=-=-=-=- FICHA DE ANAMNESE -=-=-=-=-=\n")
     print("=-=-"*10)
+
+
 
 
     print("\n- Dados :")
@@ -64,8 +71,12 @@ class Anamnese:
  
 
 
+
+
     print("\n - História Clínica :\n")
     self.questoes["queixa"] = input("\nQueixa principal : \nR = ")
+
+
 
 
     while True:
@@ -74,6 +85,8 @@ class Anamnese:
       break
      else:
       pass
+
+
 
 
     while True:
@@ -85,6 +98,8 @@ class Anamnese:
       break
      else:
       pass
+
+
 
 
     while True:
@@ -106,7 +121,12 @@ class Anamnese:
 
 
 
+
+
+
     print("\n- Objetivo(s) do paciente :\n")
+
+
 
 
     while True:
@@ -117,12 +137,16 @@ class Anamnese:
       pass
 
 
+
+
     while True:
      self.objetivos["Aliviar_estresse"] = input("\nAliviar o estresse (Sim/Não)? R = ").upper()
      if self.objetivos["Aliviar_estresse"] == "SIM" or self.objetivos["Aliviar_estresse"] == "NÃO":
       break
      else:
       pass
+
+
 
 
     while True:
@@ -133,6 +157,8 @@ class Anamnese:
       pass
 
 
+
+
     while True:
      self.objetivos["Aliviar_dor"] = input("\nAliviar as dores (Sim/Não)? R = ").upper()
      if self.objetivos["Aliviar_dor"] == "SIM" or self.objetivos["Aliviar_dor"] == "NÃO":
@@ -141,12 +167,16 @@ class Anamnese:
       pass
 
 
+
+
     while True:
      self.objetivos["Melhor_condicionamento"] = input("\nMelhorar o condicionamento físico (Sim/Não)? R = ").upper()
      if self.objetivos["Melhor_condicionamento"] == "SIM" or self.objetivos["Melhor_condicionamento"] == "NÃO":
       break
      else:
       pass
+
+
 
 
     while True:
@@ -159,10 +189,16 @@ class Anamnese:
 
 
 
+
+
+
+
   def exibir_dados(self):
    print("=-=-"*10)
    print("\n=-=-=-=-=- FICHA DE ANAMNESE -=-=-=-=-=\n")
    print("=-=-"*10)
+
+
 
 
    print("\n- DADOS :")
@@ -190,6 +226,8 @@ Endereço : {self.endereco}''')
    print(f"Usa medicamentos : ",self.questoes["usa_medicamentos"])
 
 
+
+
    print("\n- OBJETIVOS :\n")
    print(f"Melhorar a postura : ",self.objetivos["Postura"])
    print(f"Aliviar o estresse : ",self.objetivos["Aliviar_estresse"])
@@ -197,12 +235,16 @@ Endereço : {self.endereco}''')
    print(f"Aliviar as dores : ",self.objetivos["Aliviar_dor"])
    print(f"Melhor condicionamento físico : ",self.objetivos["Melhor_condicionamento"])
    print(f"Fortalecer os musculos : ",self.objetivos["Fortalecer_musculos"])
-   print("\n=-=-=-=-=- Ficha de anamnese finalizada! -=-=-=-=-=\n")
-   print("=-=-"*13)
+
+
+
 
 #Assinaturas :
+
+
 import random
 from datetime import datetime, timedelta
+
 
 class AssinaturaPilates:
     valores_tipo = {
@@ -211,6 +253,7 @@ class AssinaturaPilates:
         "mensal": 800,
         "anual": 8500
     }
+
 
     def __init__(self, aluno_id, tipo, data_inicio):
         if tipo not in self.valores_tipo:
@@ -223,6 +266,7 @@ class AssinaturaPilates:
         self.valor_a_pagar = self.valor_total
         self.status = self.definir_status()
 
+
     def formatar_data(self, data):
         try:
             if "/" in data:
@@ -234,6 +278,7 @@ class AssinaturaPilates:
         except ValueError:
             raise ValueError("Data inválida. Use o formato DD/MM/YYYY ou YYYY-MM-DD.")
 
+
     def calcular_data_fim(self):
         if self.tipo == "diariamente":
             return self.data_inicio + timedelta(days=1)
@@ -244,8 +289,10 @@ class AssinaturaPilates:
         elif self.tipo == "anual":
             return self.data_inicio + timedelta(days=365)
 
+
     def definir_status(self):
         return "ativa" if datetime.now() <= self.data_fim else "expirada"
+
 
     def renovar_assinatura(self, novo_tipo=None):
         if novo_tipo:
@@ -257,10 +304,13 @@ class AssinaturaPilates:
         self.status = self.definir_status()
         print(f"Assinatura renovada para o tipo '{self.tipo.capitalize()}' com sucesso! Nova data de término: {self.data_fim.strftime('%d/%m/%Y')}.")
 
+
     def __str__(self):
         return (f"Aluno ID: {self.aluno_id}, Tipo: {self.tipo.capitalize()}, "
                 f"Data Início: {self.data_inicio.strftime('%d/%m/%Y')}, Data Fim: {self.data_fim.strftime('%d/%m/%Y')}, "
                 f"Status: {self.status.capitalize()}, Valor Total: R${self.valor_total:.2f}")
+
+
 
 
 class Assinaturas:
@@ -270,11 +320,13 @@ class Assinaturas:
         self.turmas = {}
         self.capacidade_turma = 35
 
+
     def gerar_id_unico(self):
         while True:
             novo_id = str(random.randint(100, 999))  
             if novo_id not in self.alunos:
                 return novo_id
+
 
     def cadastrar_aluno(self, nome):
         aluno_id = self.gerar_id_unico()
@@ -282,25 +334,32 @@ class Assinaturas:
         self.alunos[aluno_id] = {"nome": nome, "senha": senha}
         print(f"Aluno {nome} (ID: {aluno_id}) cadastrado com sucesso.")
 
+
     def aluno_existe(self, aluno_id):
         return aluno_id in self.alunos
+
 
     def adicionar_assinatura(self, aluno_id, tipo, data_inicio):
         if not self.aluno_existe(aluno_id):
             print(f"Erro: O aluno com ID {aluno_id} não está cadastrado.")
             return
 
+
         if any(assinatura.aluno_id == aluno_id and assinatura.status == "ativa" for assinatura in self.assinaturas):
             print(f"Erro: O aluno com ID {aluno_id} já possui uma assinatura ativa.")
             return
 
+
         opcao_pilates = input("O aluno deseja fazer pilates individual ou em turma? (individual/turma): ").strip().lower()
+
 
         if opcao_pilates not in ["individual", "turma"]:
             print("Opção inválida. Escolha 'individual' ou 'turma'.")
             return
 
+
         nova_assinatura = AssinaturaPilates(aluno_id, tipo, data_inicio)
+
 
         if opcao_pilates == "turma":
             nova_assinatura.valor_total *= 0.75  
@@ -310,18 +369,23 @@ class Assinaturas:
                     turma_disponivel = turma
                     break
 
+
             if not turma_disponivel:
                 turma_disponivel = f"Turma {len(self.turmas) + 1}"
                 self.turmas[turma_disponivel] = []
 
+
             self.turmas[turma_disponivel].append(aluno_id)
             print(f"O aluno foi adicionado à {turma_disponivel}.")
+
 
             if len(self.turmas[turma_disponivel]) == self.capacidade_turma:
                 print(f"{turma_disponivel} está cheia!")
 
+
         self.assinaturas.append(nova_assinatura)
         print(f"Assinatura adicionada para {self.alunos[aluno_id]['nome']}: {nova_assinatura}")
+
 
     def cancelar_assinatura(self, aluno_id):
      for assinatura in self.assinaturas:
@@ -338,6 +402,7 @@ class Assinaturas:
                             print(f"{turma} foi removida por estar vazia.")
                         break
 
+
                 self.assinaturas.remove(assinatura)
                 del self.alunos[aluno_id]
                 print(f"Assinatura do aluno {nome_aluno} foi cancelada e o aluno foi removido.")
@@ -345,6 +410,8 @@ class Assinaturas:
                 print("Cancelamento abortado.")
             return
      print(f"Erro: Nenhuma assinatura encontrada para o aluno {aluno_id}.")
+
+
 
 
     def renovar_assinatura(self, aluno_id, novo_tipo=None):
@@ -356,19 +423,24 @@ class Assinaturas:
                 return
         print(f"Erro: Nenhuma assinatura encontrada para o aluno {aluno_id}.")
 
+
     def total_assinaturas(self):
         return len(self.assinaturas)
+
 
     def listar_assinaturas(self):
         return [str(assinatura) for assinatura in self.assinaturas]
 
+
     def listar_alunos(self):
         return {aluno_id: aluno_data["nome"] for aluno_id, aluno_data in self.alunos.items()}
+
 
     def listar_turmas(self):
         print("Turmas:")
         for turma, alunos in self.turmas.items():
             print(f"{turma}: {len(alunos)} alunos")
+
 
 def iniciar_sistema():
     iniciar = input("Você deseja iniciar o sistema de assinatura? (sim/não): ").strip().lower()
@@ -379,6 +451,7 @@ def iniciar_sistema():
     else:
         print("Opção inválida.")
         iniciar_sistema()
+
 
 def menu():
     assinaturas = Assinaturas()
@@ -393,7 +466,9 @@ def menu():
         print("7 - Listar Turmas")
         print("8 - Sair")
 
+
         opcao = input("Escolha uma opção: ").strip()
+
 
         if opcao == "1":
             nome = input("Digite o nome do aluno: ")
@@ -430,8 +505,44 @@ def menu():
         else:
             print("Opção inválida. Tente novamente.")
 
-user = Anamnese(None, None, None, None, None, None, None, None)
-user.questionario()
-user.exibir_dados()
 
-iniciar_sistema()
+
+
+
+
+#MENU :
+
+
+def menu_1():
+ print("Bem-vindo à Clínica de Pilates! Escolha uma opção :")
+ print('''
+1 - Cadastro
+2 - Login
+''')
+ 
+ while True:
+  opcao = int(input(""))
+
+
+  match opcao:
+   case 1:
+    user_assinatura = AssinaturaPilates(None, "anual", data_inicio="2025-01-19")
+    user_dados = Anamnese(None, None, None, None, None, None, None, None)
+    user_dados.questionario()
+    iniciar_sistema()
+   
+
+
+    break
+
+
+   case 2:
+    print("Em andamento.")
+    break
+
+
+   case _:
+    pass
+
+
+menu_1()
