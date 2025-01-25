@@ -1,5 +1,7 @@
-#Classes : Anamnese, Assinaturas, Login
+import random
+from datetime import datetime, timedelta
 
+#Classes : Anamnese, Assinaturas, Login
 
 #Anamnese :
 
@@ -14,9 +16,6 @@ class Anamnese:
     self.endereco = endereco
     self.profissao = profissao
     self.responsavel = responsavel
-
-
-
 
     self.questoes = {
      "queixa" : None,
@@ -45,13 +44,23 @@ class Anamnese:
     print("=-=-"*10)
 
 
-
-
-    print("\n- Dados :")
+    print("\n- DADOS :")
     self.nome = input("\nInforme seu nome completo : \nR = ")
     self.peso = float(input("\nInforme o seu peso: \nR = "))
     self.altura = float(input("\nInforme sua altura: \nR = "))
-    self.idade = int(input("\nInforme sua idade: \nR = "))
+    data_atual = datetime.now()
+    data_nascimento = input("\nInforme sua idade data de nascimento ( Dia/Mês/Ano ): \nR = ")
+    data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y").date()
+
+    if data_atual.month - data_nascimento.month < 0 and data_atual.day - data_nascimento.day < 0:
+     self.idade = data_atual.year - data_nascimento.year - 1
+    elif data_atual.month - data_nascimento.month < 0 and data_atual.day - data_nascimento.day >= 0:
+     self.idade = data_atual.year - data_nascimento.year - 1
+    elif data_atual.month - data_nascimento.month >= 0 and data_atual.day - data_nascimento.day >= 0:
+     self.idade = data_atual.year - data_nascimento.year
+    elif data_atual.month - data_nascimento.month >= 0 and data_atual.day - data_nascimento.day < 0:
+     self.idade = data_atual.year - data_nascimento.year - 1
+     
     self.telefone = int(input("\nInforme o seu telefone: \nR = "))
     self.endereco = input("\nInforme o seu endereço: \nR = ")
     while True:
@@ -63,21 +72,18 @@ class Anamnese:
       break
     while True:
      if self.idade < 18:
-      self.responsavel = input("\nInforme o nome do seu responsável : R = ")
+      self.responsavel = input("\nInforme o nome do seu responsável : \nR = ")
       break
      else:
       self.responsavel = "NÃO"
       break
- 
 
 
 
+    print("\n - HISTÓRIA CLÍNICA :\n")
 
-    print("\n - História Clínica :\n")
+
     self.questoes["queixa"] = input("\nQueixa principal : \nR = ")
-
-
-
 
     while True:
      self.questoes["se_praticou_pilates"] = input("\nJá praticou pilates antes (Sim/Não)? \nR = ").upper()
@@ -86,21 +92,15 @@ class Anamnese:
      else:
       pass
 
-
-
-
     while True:
      self.questoes["pratica_atividade_fisicas"] = input("\nPratica ou praticou outras atividades fisícas (Sim/Não)? \nR = ").upper()
      if self.questoes["pratica_atividade_fisicas"] == "SIM":
-      self.questoes["qual_e_frequencia_da_atividade_fisicas"] = input("Qual a frequência da atividade fisica? \nR = ")
+      self.questoes["qual_e_frequencia_da_atividade_fisicas"] = input("\nQual a frequência da atividade fisica? \nR = ")
       break
      elif self.questoes["pratica_atividade_fisicas"] == "NÃO":
       break
      else:
       pass
-
-
-
 
     while True:
      self.questoes["teve_cirurgia"] = input("\nTeve cirurgia (Sim/Não)? \nR = ").upper()
@@ -113,7 +113,7 @@ class Anamnese:
       pass
    
     while True:
-     self.questoes["usa_medicamentos"] = input("\nUsa medicamentos (Sim/Não)? R = ").upper()
+     self.questoes["usa_medicamentos"] = input("\nUsa medicamentos (Sim/Não)? \nR = ").upper()
      if self.questoes["usa_medicamentos"] == "SIM" or self.questoes["usa_medicamentos"] == "NÃO":
       break
      else:
@@ -121,12 +121,7 @@ class Anamnese:
 
 
 
-
-
-
-    print("\n- Objetivo(s) do paciente :\n")
-
-
+    print("\n- OBJETIVO(S) DO PACIENTE :\n")
 
 
     while True:
@@ -136,18 +131,12 @@ class Anamnese:
      else:
       pass
 
-
-
-
     while True:
      self.objetivos["Aliviar_estresse"] = input("\nAliviar o estresse (Sim/Não)? R = ").upper()
      if self.objetivos["Aliviar_estresse"] == "SIM" or self.objetivos["Aliviar_estresse"] == "NÃO":
       break
      else:
       pass
-
-
-
 
     while True:
      self.objetivos["Alongamento"] = input("\nAlogamento (Sim/Não)? R = ").upper()
@@ -156,9 +145,6 @@ class Anamnese:
      else:
       pass
 
-
-
-
     while True:
      self.objetivos["Aliviar_dor"] = input("\nAliviar as dores (Sim/Não)? R = ").upper()
      if self.objetivos["Aliviar_dor"] == "SIM" or self.objetivos["Aliviar_dor"] == "NÃO":
@@ -166,18 +152,12 @@ class Anamnese:
      else:
       pass
 
-
-
-
     while True:
      self.objetivos["Melhor_condicionamento"] = input("\nMelhorar o condicionamento físico (Sim/Não)? R = ").upper()
      if self.objetivos["Melhor_condicionamento"] == "SIM" or self.objetivos["Melhor_condicionamento"] == "NÃO":
       break
      else:
       pass
-
-
-
 
     while True:
      self.objetivos["Fortalecer_musculos"] = input("\nFortalecer os musculos (Sim/Não)? R = ").upper()
@@ -189,15 +169,10 @@ class Anamnese:
 
 
 
-
-
-
-
   def exibir_dados(self):
    print("=-=-"*10)
    print("\n=-=-=-=-=- FICHA DE ANAMNESE -=-=-=-=-=\n")
    print("=-=-"*10)
-
 
 
 
@@ -212,7 +187,9 @@ Altura : {self.altura}
 Telefone : {self.telefone}
 Endereço : {self.endereco}''')
    
+
    print("\n- HISTÓRIA CLÍNICA :\n")
+
    print("Queixa principal : ", self.questoes["queixa"])
    print("Praticou pilates : ", self.questoes["se_praticou_pilates"])
    if self.questoes["pratica_atividade_fisicas"] == "SIM":
@@ -226,8 +203,6 @@ Endereço : {self.endereco}''')
    print(f"Usa medicamentos : ",self.questoes["usa_medicamentos"])
 
 
-
-
    print("\n- OBJETIVOS :\n")
    print(f"Melhorar a postura : ",self.objetivos["Postura"])
    print(f"Aliviar o estresse : ",self.objetivos["Aliviar_estresse"])
@@ -239,12 +214,8 @@ Endereço : {self.endereco}''')
 
 
 
+
 #Assinaturas :
-
-
-import random
-from datetime import datetime, timedelta
-
 
 class AssinaturaPilates:
     valores_tipo = {
@@ -309,7 +280,6 @@ class AssinaturaPilates:
         return (f"Aluno ID: {self.aluno_id}, Tipo: {self.tipo.capitalize()}, "
                 f"Data Início: {self.data_inicio.strftime('%d/%m/%Y')}, Data Fim: {self.data_fim.strftime('%d/%m/%Y')}, "
                 f"Status: {self.status.capitalize()}, Valor Total: R${self.valor_total:.2f}")
-
 
 
 
@@ -412,8 +382,6 @@ class Assinaturas:
      print(f"Erro: Nenhuma assinatura encontrada para o aluno {aluno_id}.")
 
 
-
-
     def renovar_assinatura(self, aluno_id, novo_tipo=None):
         for assinatura in self.assinaturas:
             if assinatura.aluno_id == aluno_id:
@@ -441,108 +409,3 @@ class Assinaturas:
         for turma, alunos in self.turmas.items():
             print(f"{turma}: {len(alunos)} alunos")
 
-
-def iniciar_sistema():
-    iniciar = input("Você deseja iniciar o sistema de assinatura? (sim/não): ").strip().lower()
-    if iniciar == "sim":
-        menu()
-    elif iniciar in ["não", "nao"]:
-        print("O sistema não foi iniciado.")
-    else:
-        print("Opção inválida.")
-        iniciar_sistema()
-
-
-def menu():
-    assinaturas = Assinaturas()
-    while True:
-        print("\nMENU:")
-        print("1 - Cadastrar Aluno")
-        print("2 - Adicionar Assinatura")
-        print("3 - Cancelar Assinatura")
-        print("4 - Renovar Assinatura")
-        print("5 - Listar Alunos")
-        print("6 - Listar Assinaturas")
-        print("7 - Listar Turmas")
-        print("8 - Sair")
-
-
-        opcao = input("Escolha uma opção: ").strip()
-
-
-        if opcao == "1":
-            nome = input("Digite o nome do aluno: ")
-            assinaturas.cadastrar_aluno(nome)
-        elif opcao == "2":
-            aluno_id = input("Digite o ID do aluno: ")
-            tipo = input("Digite o tipo de assinatura (diariamente, semanal, mensal, anual): ").lower()
-            data_inicio = input("Digite a data de início (DD/MM/YYYY ou YYYY-MM-DD): ")
-            assinaturas.adicionar_assinatura(aluno_id, tipo, data_inicio)
-        elif opcao == "3":
-            aluno_id = input("Digite o ID do aluno cuja assinatura deseja cancelar: ")
-            assinaturas.cancelar_assinatura(aluno_id)
-        elif opcao == "4":
-            aluno_id = input("Digite o ID do aluno cuja assinatura deseja renovar: ")
-            novo_tipo = input("Digite o novo tipo de assinatura (diariamente, semanal, mensal, anual) ou pressione Enter para manter o tipo atual: ").lower()
-            if novo_tipo == "":
-                novo_tipo = None
-            assinaturas.renovar_assinatura(aluno_id, novo_tipo)
-        elif opcao == "5":
-            alunos = assinaturas.listar_alunos()
-            print("Alunos cadastrados:")
-            for id, nome in alunos.items():
-                print(f"ID: {id}, Nome: {nome}")
-        elif opcao == "6":
-            assinaturas_lista = assinaturas.listar_assinaturas()
-            print("Assinaturas:")
-            for assinatura in assinaturas_lista:
-                print(assinatura)
-        elif opcao == "7":
-            assinaturas.listar_turmas()
-        elif opcao == "8":
-            print("Encerrando o programa. Até mais!")
-            break
-        else:
-            print("Opção inválida. Tente novamente.")
-
-
-
-
-
-
-#MENU :
-
-
-def menu_1():
- print("Bem-vindo à Clínica de Pilates! Escolha uma opção :")
- print('''
-1 - Cadastro
-2 - Login
-''')
- 
- while True:
-  opcao = int(input(""))
-
-
-  match opcao:
-   case 1:
-    user_assinatura = AssinaturaPilates(None, "anual", data_inicio="2025-01-19")
-    user_dados = Anamnese(None, None, None, None, None, None, None, None)
-    user_dados.questionario()
-    iniciar_sistema()
-   
-
-
-    break
-
-
-   case 2:
-    print("Em andamento.")
-    break
-
-
-   case _:
-    pass
-
-
-menu_1()
