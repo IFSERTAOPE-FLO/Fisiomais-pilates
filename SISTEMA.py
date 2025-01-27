@@ -88,7 +88,7 @@ def menu_1():
     user_dados = Anamnese(None, None, None, None, None, None, None, None)
     user_dados.questionario()
     iniciar_sistema()
-    break
+    pass
      
 
    case 2:
