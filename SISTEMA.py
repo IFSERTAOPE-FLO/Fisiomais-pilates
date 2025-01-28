@@ -72,13 +72,19 @@ def menu():
 
 def menu_1(): 
  while True:
-  print('''\n! Bem-vindo à Clínica de Pilates ! 
-       
+  print("=-="*20)
+  print('''\n          =- ! Bem-vindo ao Studio de Pilates ! -=
+        
+                              -
+        
 1 - Cadastro
 2 - Login
 3 - Sair 
+        
 ''')
-  opcao = int(input("Escolha uma opção : "))
+  print("=-="*20)
+
+  opcao = int(input("\nEscolha uma opção : "))
 
 
 
@@ -88,7 +94,7 @@ def menu_1():
     user_dados = Anamnese(None, None, None, None, None, None, None, None)
     user_dados.questionario()
     iniciar_sistema()
-    break
+    pass
      
 
    case 2:

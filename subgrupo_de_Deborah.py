@@ -408,4 +408,3 @@ class Assinaturas:
         print("Turmas:")
         for turma, alunos in self.turmas.items():
             print(f"{turma}: {len(alunos)} alunos")
-
