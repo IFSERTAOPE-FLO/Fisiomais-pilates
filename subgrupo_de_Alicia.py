@@ -1,31 +1,24 @@
-from AssinaturaPilates import Assinaturas
+from Assinaturas import Assinaturas
 from Anamnese import Anamnese
-from datetime import datetime  
 
-class Aluno(Anamnese, Assinaturas):  
-    def _init_(self, nome, peso, altura, idade, condicoes=None):
-        super()._init_(nome, peso, altura, idade, condicoes)  
+class Aluno(Anamnese):  
+    def __init__(self, nome, peso, altura, idade, condicoes=None):
+        super().__init__(nome, peso, altura, idade, condicoes)  
 
         assinaturas_system = Assinaturas()
-
-        
         assinatura = assinaturas_system.buscar_assinatura_por_nome(nome)
+        
         if not assinatura:
             raise ValueError(f"Erro: Não há assinatura ativa para o aluno '{nome}'. Cadastre primeiro.")
 
-        aluno_id = assinatura['aluno_id']
-        tipo = assinatura['tipo']
-        data_inicio = assinatura['data_inicio']
-
-        # Armazenando os dados de assinatura
-        self.id = aluno_id
+        self.id = assinatura.aluno_id
         self.nome = nome  
         self.peso = peso
         self.altura = altura
         self.idade = idade
-        self.condicoes = condicoes
+        self.condicoes = condicoes or []
         self.assinatura = assinatura  
-        self._senha = assinatura['senha']  
+        self._senha = assinaturas_system.alunos[self.id]["senha"]  
 
     def exibir_dados(self):
         print("\n=-=-=-= DADOS DO ALUNO =-=-=-=")
@@ -35,24 +28,25 @@ class Aluno(Anamnese, Assinaturas):
         print(f"Altura: {self.altura:.2f} m")
         print(f"Idade: {self.idade}")
         print(f"Condições médicas: {', '.join(self.condicoes) if self.condicoes else 'Nenhuma'}")
+        print(f"Assinatura: {self.assinatura.tipo.capitalize()} - Status: {self.assinatura.status}")
         print("=-=-=-=\n")
 
     def alterar_dados(self):
         print("Alteração de dados do aluno: ")
 
-        novo_nome = input("Digite o novo nome (ou pressione Enter para manter o atual): ")
+        novo_nome = input("Digite o novo nome (ou pressione Enter para manter o atual): ").strip()
         if novo_nome:
             self.nome = novo_nome
 
         try:
-            novo_peso = input("Digite o novo peso (ou pressione Enter para manter o atual): ")
+            novo_peso = input("Digite o novo peso (ou pressione Enter para manter o atual): ").strip()
             if novo_peso:
                 self.peso = float(novo_peso)
         except ValueError:
             print("Valor inválido para peso. Use números decimais.")
 
         try:
-            nova_altura = input("Digite a nova altura (ou pressione Enter para manter o atual): ")
+            nova_altura = input("Digite a nova altura (ou pressione Enter para manter o atual): ").strip()
             if nova_altura:
                 self.altura = float(nova_altura)
         except ValueError:
@@ -61,49 +55,52 @@ class Aluno(Anamnese, Assinaturas):
         print(f"Dados do aluno {self.nome} alterados com sucesso!")
 
     def alterar_senha(self, nova_senha):
-        Assinaturas().atualizar_senha(self.id, nova_senha)  
+        assinaturas_system = Assinaturas()
+        assinaturas_system.alunos[self.id]["senha"] = nova_senha
         print("Senha alterada com sucesso!")
 
     def verificar_senha(self, senha):
-        return Assinaturas().verificar_senha(self.id, senha)  
+        assinaturas_system = Assinaturas()
+        return assinaturas_system.alunos[self.id]["senha"] == senha
 
 def cadastrar_aluno():
     print("\n=-=-=-= CADASTRO DE ALUNO =-=-=-=")
 
-    nome = input("Digite o nome do aluno: ")
-
+    nome = input("Digite o nome do aluno: ").strip()
     assinaturas_system = Assinaturas()
 
-    # Buscar a assinatura ativa do aluno
     assinatura = assinaturas_system.buscar_assinatura_por_nome(nome)
     if not assinatura:
         print("Erro: O aluno não possui uma assinatura ativa. Cadastre a assinatura primeiro.")
         return None
 
-    peso = float(input("Digite o peso do aluno (kg): "))
-    altura = float(input("Digite a altura do aluno (m): "))
-    idade = int(input("Digite a idade do aluno: "))
-    
-    condicoes_medicas = input("Informe as condições médicas do aluno (separadas por vírgula, ou 'Nenhuma' se não houver): ")
+    try:
+        peso = float(input("Digite o peso do aluno (kg): ").strip())
+        altura = float(input("Digite a altura do aluno (m): ").strip())
+        idade = int(input("Digite a idade do aluno: ").strip())
+    except ValueError:
+        print("Erro: Insira valores numéricos válidos para peso, altura e idade.")
+        return None
+
+    condicoes_medicas = input("Informe as condições médicas do aluno (separadas por vírgula, ou 'Nenhuma' se não houver): ").strip()
     condicoes_medicas = [] if condicoes_medicas.lower() == 'nenhuma' else [x.strip() for x in condicoes_medicas.split(',')]
 
     aluno = Aluno(nome, peso, altura, idade, condicoes_medicas)
-
     aluno.exibir_dados()
     aluno.questionario()  
 
     return aluno
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     try:
         aluno1 = cadastrar_aluno()
         if aluno1:
             aluno1.exibir_dados()
 
-            nova_senha = input("Digite a nova senha: ")
+            nova_senha = input("Digite a nova senha: ").strip()
             aluno1.alterar_senha(nova_senha)
 
-            senha_teste = input("Digite a senha para verificação: ")
+            senha_teste = input("Digite a senha para verificação: ").strip()
             if aluno1.verificar_senha(senha_teste):
                 print("Senha verificada com sucesso!")
             else:
