@@ -1,7 +1,7 @@
 from Assinaturas import Assinaturas
 from Anamnese import Anamnese
 
-class Aluno(Anamnese):  
+class Aluno(Anamnese, Assinaturas):  
     def __init__(self, nome, peso, altura, idade, condicoes=None):
         super().__init__(nome, peso, altura, idade, condicoes)  
 
