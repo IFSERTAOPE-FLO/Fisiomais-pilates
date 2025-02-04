@@ -1,8 +1,5 @@
 from subgrupo_de_Deborah import Anamnese, AssinaturaPilates, Assinaturas
 
-
-
-
 def iniciar_sistema():
     iniciar = input("Você deseja iniciar o sistema de assinatura? (sim/não): ").strip().lower()
     if iniciar == "sim":
@@ -109,6 +106,4 @@ def menu_1():
    case _:
     pass
      
-
-
-menu_1()
+iniciar_sistema()
