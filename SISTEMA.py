@@ -106,4 +106,4 @@ def menu_1():
    case _:
     pass
      
-iniciar_sistema()
+menu_1()
