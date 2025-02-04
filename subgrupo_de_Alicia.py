@@ -1,5 +1,5 @@
-from Assinaturas import Assinaturas
-from Anamnese import Anamnese
+from subgrupo_de_Deborah import Assinaturas
+from subgrupo_de_Deborah import Anamnese
 
 class Aluno(Anamnese, Assinaturas):  
     def __init__(self, nome, peso, altura, idade, condicoes=None):
