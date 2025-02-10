@@ -1,4 +1,5 @@
 from subgrupo_de_Deborah import Anamnese, AssinaturaPilates, Assinaturas
+from teste import SistemaLogin
 
 def iniciar_sistema():
     iniciar = input("Você deseja iniciar o sistema de assinatura? (sim/não): ").strip().lower()
@@ -95,7 +96,11 @@ def menu_1():
      
 
    case 2:
-    print("\n =-= EM ANDAMENTO =-= \n")
+    aluno_id = str(input("Digite o ID do aluno: "))
+    senha = str(input("Digite a senha: "))
+    login_sistema = SistemaLogin()
+    if login_sistema.login(aluno_id, senha):
+        iniciar_sistema()
     pass
 
    
