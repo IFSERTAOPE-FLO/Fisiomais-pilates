@@ -1,16 +1,6 @@
 from subgrupo_de_Deborah import Anamnese, AssinaturaPilates, Assinaturas
 from teste import SistemaLogin
 
-def iniciar_sistema():
-    iniciar = input("Você deseja iniciar o sistema de assinatura? (sim/não): ").strip().lower()
-    if iniciar == "sim":
-        menu()
-    elif iniciar in ["não", "nao"]:
-        print("O sistema não foi iniciado.")
-    else:
-        print("Opção inválida.")
-        iniciar_sistema()
-
 
 def menu():
     assinaturas = Assinaturas()
@@ -91,7 +81,7 @@ def menu_1():
     user_assinatura = AssinaturaPilates(None, "anual", data_inicio="2025-01-19")
     user_dados = Anamnese(None, None, None, None, None, None, None, None)
     user_dados.questionario()
-    iniciar_sistema()
+    menu()
     pass
      
 
@@ -100,7 +90,7 @@ def menu_1():
     senha = str(input("Digite a senha: "))
     login_sistema = SistemaLogin()
     if login_sistema.login(aluno_id, senha):
-        iniciar_sistema()
+        menu()
     pass
 
    
