@@ -276,10 +276,13 @@ class AssinaturaPilates:
         print(f"Assinatura renovada para o tipo '{self.tipo.capitalize()}' com sucesso! Nova data de término: {self.data_fim.strftime('%d/%m/%Y')}.")
 
 
+
+
     def __str__(self):
         return (f"Aluno ID: {self.aluno_id}, Tipo: {self.tipo.capitalize()}, "
                 f"Data Início: {self.data_inicio.strftime('%d/%m/%Y')}, Data Fim: {self.data_fim.strftime('%d/%m/%Y')}, "
                 f"Status: {self.status.capitalize()}, Valor Total: R${self.valor_total:.2f}")
+
 
 
 
@@ -289,6 +292,8 @@ class Assinaturas:
         self.alunos = {}
         self.turmas = {}
         self.capacidade_turma = 35
+
+
 
 
     def gerar_id_unico(self):
@@ -332,7 +337,7 @@ class Assinaturas:
 
 
         if opcao_pilates == "turma":
-            nova_assinatura.valor_total *= 0.75  
+            nova_assinatura.valor_total *= 0.75
             turma_disponivel = None
             for turma, alunos in self.turmas.items():
                 if len(alunos) < self.capacidade_turma:
@@ -357,29 +362,31 @@ class Assinaturas:
         print(f"Assinatura adicionada para {self.alunos[aluno_id]['nome']}: {nova_assinatura}")
 
 
+
+
     def cancelar_assinatura(self, aluno_id):
-     for assinatura in self.assinaturas:
-        if assinatura.aluno_id == aluno_id:
-            nome_aluno = self.alunos[aluno_id]["nome"]
-            confirmacao = input(f"Você deseja cancelar a assinatura do aluno {nome_aluno} (ID: {aluno_id})? (sim/não): ").strip().lower()
-            if confirmacao == "sim":
-                for turma, alunos in self.turmas.items():
-                    if aluno_id in alunos:
-                        alunos.remove(aluno_id)
-                        print(f"O aluno {nome_aluno} foi removido da {turma}.")
-                        if len(alunos) == 0:
-                            del self.turmas[turma]  
-                            print(f"{turma} foi removida por estar vazia.")
-                        break
+        for assinatura in self.assinaturas:
+            if assinatura.aluno_id == aluno_id:
+                nome_aluno = self.alunos[aluno_id]["nome"]
+                confirmacao = input(f"Você deseja cancelar a assinatura do aluno {nome_aluno} (ID: {aluno_id})? (sim/não): ").strip().lower()
+                if confirmacao == "sim":
+                    for turma, alunos in self.turmas.items():
+                        if aluno_id in alunos:
+                            alunos.remove(aluno_id)
+                            print(f"O aluno {nome_aluno} foi removido da {turma}.")
+                            if len(alunos) == 0:
+                                del self.turmas[turma]
+                                print(f"{turma} foi removida por estar vazia.")
+                            break
 
 
-                self.assinaturas.remove(assinatura)
-                del self.alunos[aluno_id]
-                print(f"Assinatura do aluno {nome_aluno} foi cancelada e o aluno foi removido.")
-            else:
-                print("Cancelamento abortado.")
-            return
-     print(f"Erro: Nenhuma assinatura encontrada para o aluno {aluno_id}.")
+                    self.assinaturas.remove(assinatura)
+                    del self.alunos[aluno_id]
+                    print(f"Assinatura do aluno {nome_aluno} foi cancelada e o aluno foi removido.")
+                else:
+                    print("Cancelamento abortado.")
+                return
+        print(f"Erro: Nenhuma assinatura encontrada para o aluno {aluno_id}.")
 
 
     def renovar_assinatura(self, aluno_id, novo_tipo=None):
@@ -402,8 +409,7 @@ class Assinaturas:
 
     def listar_alunos(self):
         return {aluno_id: aluno_data["nome"] for aluno_id, aluno_data in self.alunos.items()}
-
-
+   
     def listar_turmas(self):
         print("Turmas:")
         for turma, alunos in self.turmas.items():
